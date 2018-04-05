@@ -1,0 +1,9 @@
+FROM golang:1.9 
+
+RUN mkdir /rpc
+ADD . /rpc
+ADD . /go/src/github.com/pasiukevich/rpc
+WORKDIR /rpc/rpc_server
+RUN go get -d -v github.com/golang/protobuf/proto
+RUN go get -d -v google.golang.org/grpc
+RUN go build main.go

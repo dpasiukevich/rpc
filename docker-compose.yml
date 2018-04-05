@@ -3,8 +3,8 @@ services:
   rpc_server1:
     build:
       context: .
-      dockerfile: Dockerfile-server
-    command: /rpc/server/server -addr=0.0.0.0:3000
+      dockerfile: Dockerfile-rpc-server
+    command: /rpc/rpc_server/main -port=3000
     ports:
       - "3000:3000"
     volumes:

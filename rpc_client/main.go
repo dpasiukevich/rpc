@@ -18,7 +18,7 @@ import (
 
 func main() {
 
-	serverAddr := flag.String("serverAddr", "127.0.0.1:5000", "Address of rpc server.")
+	serverAddr := flag.String("serverAddr", "127.0.0.1:3000", "Address of rpc server.")
 
 	flag.Parse()
 
