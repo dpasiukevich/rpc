@@ -1,0 +1,8 @@
+FROM golang:1.9 
+
+RUN mkdir /rpc
+ADD . /rpc
+ADD . /go/src/github.com/pasiukevich/rpc
+WORKDIR /rpc/cluster
+RUN go get -u github.com/fsnotify/fsnotify
+RUN go build proxy.go 

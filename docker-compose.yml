@@ -1,0 +1,43 @@
+version : '3.3'
+services:
+  rpc_server1:
+    build:
+      context: .
+      dockerfile: Dockerfile-server
+    command: /rpc/server/server -addr=0.0.0.0:3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - rpc_server1:/rpc/server/.backups
+  rpc_server2:
+    build:
+      context: .
+      dockerfile: Dockerfile-server
+    command: /rpc/server/server -addr=0.0.0.0:3001
+    ports:
+      - "3001:3001"
+    volumes:
+      - rpc_server2:/rpc/server/.backups
+  rpc_server3:
+    build:
+      context: .
+      dockerfile: Dockerfile-server
+    command: /rpc/server/server -addr=0.0.0.0:3002
+    ports:
+      - "3002:3002"
+    volumes:
+      - rpc_server3:/rpc/server/.backups
+  rpc_cluster_proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile-proxy
+    command: /rpc/cluster/proxy -addr=0.0.0.0:3050
+    ports:
+      - "3050:3050"
+    volumes:
+      - rpc_cluster_proxy:/rpc/cluster/.backups
+volumes:
+  rpc_server1:
+  rpc_server2:
+  rpc_server3:
+  rpc_cluster_proxy:

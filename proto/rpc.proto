@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package proto;
+
+service Storage {
+  rpc GetValue(Request) returns (Response) {}
+}
+
+message Request {
+  string body = 1;
+}
+
+message Response {
+  string body = 1;
+}

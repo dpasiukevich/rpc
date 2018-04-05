@@ -1,0 +1,14 @@
+[
+    {
+        "addr":"rpc_server1:3000",
+        "weight":500
+    }, 
+    {
+       "addr":"rpc_server2:3001",
+       "weight":500
+    },
+    {
+       "addr":"rpc_server3:3002",
+       "weight":250
+    }
+ ]
