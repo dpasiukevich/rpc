@@ -104,7 +104,7 @@ func New() *DataStore {
 	}
 
 	go dataStore.ttld()
-	go dataStore.persistenced()
+	// go dataStore.persistenced()
 	go dataStore.memoryd()
 
 	return &dataStore

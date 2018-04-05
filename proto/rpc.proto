@@ -3,13 +3,31 @@ syntax = "proto3";
 package proto;
 
 service Storage {
-  rpc GetValue(Request) returns (Response) {}
+  rpc GetValue(GetValueRequest) returns (GetValueResponse) {}
+
+  rpc SetValue(SetValueRequest) returns (SetValueResponse) {}
+
+  rpc GetKeys(GetKeysRequest) returns (stream GetKeysResponse) {}
 }
 
-message Request {
-  string body = 1;
+message GetValueRequest {
+  string key = 1;
 }
 
-message Response {
-  string body = 1;
+message GetValueResponse {
+  string value = 1;
+}
+
+message SetValueRequest {
+  string key = 1;
+  string value = 2;
+  string ttl = 3;
+}
+
+message SetValueResponse {}
+
+message GetKeysRequest {}
+
+message GetKeysResponse {
+  string key = 1;
 }

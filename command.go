@@ -92,12 +92,13 @@ func Set(client *Client) {
 
 	// expire is the time to live in seconds
 	var expire int64
+	var err error
 
 	// if ttl is set by user
 	if len(client.args) == 3 {
 
 		// parse ttl and check it for correctness
-		expire, err := strconv.ParseInt(client.args[2], 10, 64)
+		expire, err = strconv.ParseInt(client.args[2], 10, 64)
 		if err != nil {
 			client.err = errTTLFormat
 			return

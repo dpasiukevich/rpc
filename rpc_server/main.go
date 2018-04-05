@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -34,21 +35,64 @@ func main() {
 	}
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", port))
-	fmt.Println("LUL", *portPtr)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
+
+	rs := rpcServer{
+		client: rpc.NewClient(dataStore),
+	}
+
 	grpcServer := grpc.NewServer()
-	pb.RegisterStorageServer(grpcServer, &rpcServer{})
+	pb.RegisterStorageServer(grpcServer, &rs)
+
+	log.Println("Server is listening on port:", port)
+
 	grpcServer.Serve(lis)
-
-	log.Println("Server is listening on:", *portPtr)
-
 }
 
-type rpcServer struct{}
+type rpcServer struct{
+	client *rpc.Client
+}
 
-func (s *rpcServer) GetValue(ctx context.Context, req *pb.Request) (*pb.Response, error) {
-	fmt.Println("LUL", req.Body)
-	return &pb.Response{Body: "test"}, nil
+func (s *rpcServer) GetValue(ctx context.Context, req *pb.GetValueRequest) (*pb.GetValueResponse, error) {
+	reply, err := s.client.Exec("get", []string{strings.TrimSpace(req.Key)})
+	if err != nil {
+		return nil, err
+	}
+	return &pb.GetValueResponse{Value: reply}, nil
+}
+
+func (s *rpcServer) SetValue(ctx context.Context, req *pb.SetValueRequest) (*pb.SetValueResponse, error) {
+
+	args := []string{
+		strings.TrimSpace(req.Key),
+		strings.TrimSpace(req.Value),
+	}
+
+	if req.Ttl != "" {
+		args = append(args, strings.TrimSpace(req.Ttl))
+	}
+
+	_, err := s.client.Exec("set", args)
+	if err != nil {
+		return nil, err
+	}
+	return &pb.SetValueResponse{}, nil
+}
+
+func (s *rpcServer) GetKeys(req *pb.GetKeysRequest, stream pb.Storage_GetKeysServer) error {
+	reply, err := s.client.Exec("keys", []string{})
+	if err != nil {
+		return err
+	}
+
+	fmt.Println("keys", reply)
+
+	for _, key := range strings.Split(reply, " ") {
+		if err := stream.Send(&pb.GetKeysResponse{Key: key}); err != nil {
+			return err
+		}
+	}
+	return nil
 }
