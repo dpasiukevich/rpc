@@ -87,8 +87,6 @@ func (s *rpcServer) GetKeys(req *pb.GetKeysRequest, stream pb.Storage_GetKeysSer
 		return err
 	}
 
-	fmt.Println("keys", reply)
-
 	for _, key := range strings.Split(reply, " ") {
 		if err := stream.Send(&pb.GetKeysResponse{Key: key}); err != nil {
 			return err
