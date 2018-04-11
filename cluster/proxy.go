@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/pasiukevich/rpc"
+	"github.com/dpasiukevich/rpc"
 
 	// for file changes monitoring
 	"github.com/fsnotify/fsnotify"

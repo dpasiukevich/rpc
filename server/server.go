@@ -9,7 +9,7 @@ import (
 	"net"
 	"strings"
 
-	"github.com/pasiukevich/rpc"
+	"github.com/dpasiukevich/rpc"
 )
 
 func handleConnection(conn net.Conn, dataStore *rpc.DataStore) {

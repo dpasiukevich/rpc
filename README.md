@@ -1,8 +1,8 @@
 rpc database
 =======================
 
-[![Go Doc](https://godoc.org/github.com/pasiukevich/rpc?status.svg)](https://godoc.org/github.com/pasiukevich/rpc)
-[![Go Report Card](https://goreportcard.com/badge/github.com/pasiukevich/rpc)](https://goreportcard.com/report/github.com/pasiukevich/rpc)
+[![Go Doc](https://godoc.org/github.com/dpasiukevich/rpc?status.svg)](https://godoc.org/github.com/dpasiukevich/rpc)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dpasiukevich/rpc)](https://goreportcard.com/report/github.com/dpasiukevich/rpc)
 
 About
 -----
@@ -11,7 +11,7 @@ The in-memory database with caching, written in Golang.
 
 Install
 -------
-`go get github.com/pasiukevich/rpc`
+`go get github.com/dpasiukevich/rpc`
 
 To run in the container, clone this repo and run:
 

@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"context"
 
-	pb "github.com/pasiukevich/rpc/proto"
+	pb "github.com/dpasiukevich/rpc/proto"
 	"bufio"
 	"os"
 	"strings"
