@@ -6,8 +6,8 @@ import (
 	"net"
 	"context"
 
-	"github.com/pasiukevich/rpc"
-	pb "github.com/pasiukevich/rpc/proto"
+	"github.com/dpasiukevich/rpc"
+	pb "github.com/dpasiukevich/rpc/proto"
 
 	"fmt"
 	"google.golang.org/grpc"
